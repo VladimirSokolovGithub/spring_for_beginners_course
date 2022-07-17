@@ -1,0 +1,8 @@
+Две базовые концепции Spring framework
+
+IoC - inversion of control (инверсия управления)
+
+DI - dependency injection (внедрение зависимостей)
+
+AOP - aspects oriented programming (аспектно-ориентированное программирование)
+

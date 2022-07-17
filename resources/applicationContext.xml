@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:property-placeholder location="classpath:myApp.properties"/>
+
+
+    <!-- Опишем в нашем config файле класс Dog -->
+    <!-- Мы будем вызывать объект класса Dog, по id -myPet-->
+
+    <bean id = "myPet"
+        class="ru.sokolov.spring.chapter_1_IoC_and_DI.Les_4_5_Inversion_of_control.Dog">
+    </bean>
+
+<!-- Les_7_dependency_injection_using_the_constructor -->
+<!-- Опишем bean, который относится к классу Person -->
+
+    <!-- С помощью тега constructor-arg мы указываем на наш конструктор
+ и с помощью ref="myPet" мы указываем ссылку на bean myPet(класса Cat),
+ который будет помещен в параметр нашего конструктора Person -->
+
+    <!-- Теперь когда spring контейнер прочитает этот конфиг файл, он создаст два бина, Dog и Person
+ и самостоятельно внедрит вот эту <constructor-arg ref="myPet"/> зависимость. Перейдём в класс Test3 -->
+
+<!--    <bean id = "myPerson"-->
+<!--          class="ru.sokolov.spring.chapter_1_IoC_and_DI.Les_6_dependency_injection_introduction.Person">-->
+<!--        <constructor-arg ref="myPet"/>-->
+<!--    </bean>-->
+
+
+<!--    Les_8_dependency_injection_using_a_setter    -->
+<!--    здесь происходит конвертация pet в setPet <property name="pet" ref="myPet"/>.
+Отбрасывается первая буква " et" и заменяется на заглавную, и перед ней добавляется set - setPet.
+  Далее указывается ссылка на наше животное -->
+    <bean id = "myPerson"
+        class="ru.sokolov.spring.chapter_1_IoC_and_DI.Les_6_dependency_injection_introduction.Person">
+        <property name="pet" ref="myPet"/>
+
+<!--   Les_9_Embedding(Внедрение)_strings_and_other_values     -->
+<!--        <property name="surname" value="Sokolov"/> &lt;!&ndash; Прописывать значения в таком hard code варианте не очень хорошая идея &ndash;&gt;-->
+<!--        <property name="age" value="42"/>-->
+
+
+        <property name="surname" value="${person.surname}"/>
+        <property name="age" value="${person.age}"/>
+    </bean>
+
+</beans>
