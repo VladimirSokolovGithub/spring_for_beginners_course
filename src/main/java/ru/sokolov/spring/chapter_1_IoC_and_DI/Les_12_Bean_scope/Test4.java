@@ -8,7 +8,7 @@ package ru.sokolov.spring.chapter_1_IoC_and_DI.Les_12_Bean_scope;
 // этого необходимо разделить их запятой: new ClassPathXmlApplicationContext("applicationContext2.xml", "applicationContext.xml");
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.sokolov.spring.chapter_1_IoC_and_DI.Les_4_5_Inversion_of_control.Dog;
+import ru.sokolov.spring.chapter_1_IoC_and_DI.Les_4_5_inversion_of_control.Dog;
 
 public class Test4 {
     public static void main(String[] args) {

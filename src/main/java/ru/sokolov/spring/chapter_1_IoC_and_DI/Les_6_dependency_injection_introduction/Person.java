@@ -3,8 +3,11 @@ package ru.sokolov.spring.chapter_1_IoC_and_DI.Les_6_dependency_injection_introd
 //У каждого домашнего животного должен быть любящий его хозяин.
 //Создадим клас Person и пропишем в его конструктор Pet
 
-import ru.sokolov.spring.chapter_1_IoC_and_DI.Les_4_5_Inversion_of_control.Pet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import ru.sokolov.spring.chapter_1_IoC_and_DI.Les_4_5_inversion_of_control.Pet;
 
+@Component("personBean")
 public class Person {
     private Pet pet;
     //Les_9_10_Embedding_strings_and_other_values
@@ -14,14 +17,19 @@ public class Person {
     //Les_7_dependency_injection_using_the_constructor
     //В этом примере Person, мы добавляем ему животное, указываем эту зависимость через конструктор.
     //Теперь напишем эту зависимость в нашем config файле.
-//    public Person(Pet pet) {
-//        System.out.println("Person bean is created");
-//        this.pet = pet;
-//    }
 
-    public Person() {
+    //Разкомментировали конструктор на уроке 15  - Les_15_annotation_Autowired_for_the_constructor
+
+    @Autowired
+    public Person(Pet pet) {
         System.out.println("Person bean is created");
+        this.pet = pet;
     }
+
+    //Закомментировали конструктор на уроке 15  - Les_15_annotation_Autowired_for_the_constructor
+//    public Person() {
+//        System.out.println("Person bean is created");
+//    }
 
     //pet -> setPet () - конвертация pet в setPet
     public void setPet(Pet pet) {

@@ -9,14 +9,13 @@
 
 
 
+<!--    Так как мы убрали здесь объявление scope - то default scope будет singleton -->
+    <bean id="myPet"
+          class="ru.sokolov.spring.chapter_1_IoC_and_DI.Les_13_Init_and_destroy_methods.Dog1"
+          init-method="init"
+          destroy-method="destroy"
+          scope="prototype">
 
-<!--    scope="singleton" - можно указывать, а можно и не указывать-->
-
-    <bean id = "myPet"
-        class="ru.sokolov.spring.chapter_1_IoC_and_DI.Les_4_5_inversion_of_control.Dog"
-        scope="singleton">
     </bean>
-
-
 
 </beans>

@@ -15,7 +15,7 @@
     <!-- Мы будем вызывать объект класса Dog, по id -myPet-->
 
     <bean id = "myPet"
-        class="ru.sokolov.spring.chapter_1_IoC_and_DI.Les_4_5_Inversion_of_control.Dog">
+        class="ru.sokolov.spring.chapter_1_IoC_and_DI.Les_4_5_inversion_of_control.Dog">
     </bean>
 
 <!-- Les_7_dependency_injection_using_the_constructor -->
