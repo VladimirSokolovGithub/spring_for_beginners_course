@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.sokolov.spring.chapter_1_IoC_and_DI.Les_4_5_inversion_of_control.Pet;
 
-@Component("personBean")
+//@Component("personBean") //закомментировано из за урока Les_18_annotation_Qualifier
 public class Person {
     private Pet pet;
     //Les_9_10_Embedding_strings_and_other_values
@@ -20,7 +20,7 @@ public class Person {
 
     //Разкомментировали конструктор на уроке 15  - Les_15_annotation_Autowired_for_the_constructor
 
-    @Autowired
+//    @Autowired //закомментировано из за урока Les_18_annotation_Qualifier
     public Person(Pet pet) {
         System.out.println("Person bean is created");
         this.pet = pet;

@@ -5,7 +5,7 @@ import ru.sokolov.spring.chapter_1_IoC_and_DI.Les_4_5_inversion_of_control.Pet;
 public class Dog1 implements Pet {
 
     public Dog1(){
-        System.out.println("Dog bean is created");
+        System.out.println("Dog1 bean is created");
     }
 
     @Override
