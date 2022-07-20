@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.sokolov.spring.chapter_1_IoC_and_DI.Les_4_5_inversion_of_control.Pet;
 
-@Component("personBean2")
+//@Component("personBean2") // Закомментированно из за урока - Les_22_SpringContainerConfigurationUsingJavaCode_way2;
 public class Person2 {
 
     //Для внедрения зависимости у поля так же используется аннотация @Autowired и поля могут быть даже
@@ -33,8 +33,15 @@ public class Person2 {
 //    }
 
     //Конструктор добавлен в уроке Les_18_annotation_Qualifier
-    @Autowired
-    public Person2(@Qualifier("catBean") Pet pet) {
+    // Закомментированно из за урока - Les_22_SpringContainerConfigurationUsingJavaCode_way2;
+//    @Autowired
+//    public Person2(@Qualifier("catBean") Pet pet) {
+//        System.out.println("Person bean is created");
+//        this.pet = pet;
+//    }
+
+    //добавлен для урока -Les_22_SpringContainerConfigurationUsingJavaCode_way2;
+        public Person2(Pet pet) {
         System.out.println("Person bean is created");
         this.pet = pet;
     }
