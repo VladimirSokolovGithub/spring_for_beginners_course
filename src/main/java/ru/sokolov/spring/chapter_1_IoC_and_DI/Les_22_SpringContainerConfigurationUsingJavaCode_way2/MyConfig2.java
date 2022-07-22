@@ -2,6 +2,7 @@ package ru.sokolov.spring.chapter_1_IoC_and_DI.Les_22_SpringContainerConfigurati
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import ru.sokolov.spring.chapter_1_IoC_and_DI.Les_16_annotation_Autowired_for_the_setter.Person2;
 import ru.sokolov.spring.chapter_1_IoC_and_DI.Les_4_5_inversion_of_control.Cat;
@@ -10,6 +11,7 @@ import ru.sokolov.spring.chapter_1_IoC_and_DI.Les_4_5_inversion_of_control.Pet;
 //Для создания и работы с нашими бинами напишем методы
 
 @Configuration
+@PropertySource("classpath:myApp.properties")
 public class MyConfig2 {
 
     //метод будет создавать и возвращать объект Cat

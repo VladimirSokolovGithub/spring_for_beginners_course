@@ -29,6 +29,8 @@ public class Test17 {
         Person2 person = context.getBean("person2Bean", Person2.class);
         person.callYourPet();
 
+        context.close();
+
     }
 
 }

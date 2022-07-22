@@ -22,10 +22,10 @@ public class Person2 {
     private Pet pet;
 
 //    @Value("Sokolov")
-//    @Value("${person.surname}") //закомментировано из за урока Les_20_Scope_PostConstruct_and_PreDestroy_annotations
+    @Value("${person.surname}") //закомментировано из за урока Les_20_Scope_PostConstruct_and_PreDestroy_annotations
     private String surname;
 //    @Value("42")
-//    @Value("${person.age}") //закомментировано из за урока Les_20_Scope_PostConstruct_and_PreDestroy_annotations
+    @Value("${person.age}") //закомментировано из за урока Les_20_Scope_PostConstruct_and_PreDestroy_annotations
     private int age;
 
 //    public Person2() {
