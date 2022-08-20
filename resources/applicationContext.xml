@@ -47,6 +47,7 @@
 <!--        <property name="age" value="42"/>-->
 
 
+<!--        Les_10    -->
         <property name="surname" value="${person.surname}"/>
         <property name="age" value="${person.age}"/>
     </bean>
