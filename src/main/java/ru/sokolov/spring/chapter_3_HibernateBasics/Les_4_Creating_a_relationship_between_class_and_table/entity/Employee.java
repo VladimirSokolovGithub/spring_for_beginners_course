@@ -1,9 +1,6 @@
 package ru.sokolov.spring.chapter_3_HibernateBasics.Les_4_Creating_a_relationship_between_class_and_table.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "employees") //В аннотации @Table() прописываем с какой таблицей будет связан класс Employee.
@@ -21,9 +18,13 @@ import javax.persistence.Table;
 // JPA, то используя аннотации JPA нам не придется менять весь код. Так как другая реализация
 // JPA тоже будет использовать эти аннотации.
 
+//Hibernate поддерживает несколько стратегий или вариантов генерации значений для primary key столбца.
+// Эти варианты генерации значений описывает аннотация @GeneratedValue. (Смотрим Les_4 - класс Employee).
+
 public class Employee {
 
-    @Id
+    @Id //аннотация @Id означает, что наше поле id это primary key.
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // аннотация @GeneratedValue позволяет задать варианты(стратегии) генерации значений для primary key столбца
     @Column(name = "id")
     private int id;
 

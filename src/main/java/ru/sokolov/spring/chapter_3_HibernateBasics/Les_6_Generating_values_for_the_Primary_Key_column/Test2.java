@@ -1,4 +1,4 @@
-package ru.sokolov.spring.chapter_3_HibernateBasics.Les_5_Saving_Java_objects_in_the_database;
+package ru.sokolov.spring.chapter_3_HibernateBasics.Les_6_Generating_values_for_the_Primary_Key_column;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,7 +10,7 @@ import ru.sokolov.spring.chapter_3_HibernateBasics.Les_4_Creating_a_relationship
 // того, чтобы иметь связь с нашей базой данных. Сессии мы можем получить из Session factory.
 // Далее мы должны создать саму сессию. Сессию мы получаем у фабрики, вызвав метод getCurrentSession().
 
-public class Test1 {
+public class Test2 {
     public static void main(String[] args) {
 
         SessionFactory factory = new Configuration()
@@ -22,7 +22,12 @@ public class Test1 {
             Session session = factory.getCurrentSession();
 
             //Теперь будем сохранять в базу данных объект класса Employee
-            Employee employee = new Employee("Vladimir", "Sokolov", "IT", 500);
+
+//            Employee employee = new Employee("Mikhail", "Ivanov", "HR", 750);
+
+//            Employee employee = new Employee("Aleksandr", "Smirnov", "Sales", 700);
+
+            Employee employee = new Employee("Aleksandr", "Ivanov", "IT", 600);
 
             session.beginTransaction(); //Для этого откроем транзакцию
             session.save(employee); //Сохраняем(инсёртим) объект employee в БД (INSERT)
@@ -31,19 +36,20 @@ public class Test1 {
             session.getTransaction().commit();
 
             System.out.println("Done!");
+            System.out.println(employee);
+
         } finally {
             factory.close(); // закрываем factory
         }
     }
 
-    //После запуска приложения в консоли появится строчка:
-    //Hibernate: insert into employees (department, name, salary, surname, id) values (?, ?, ?, ?, ?)
-    //Это означает, что в такие то столбцы нашей таблицы добавлены наши значения. Но по
-    // умолчанию они отображаются в виде вопросов. Если мы хотим что бы эти значения отображались, то
-    // необходимо самостоятельно добавить в проект jar файл log4j.jar. Но это уже для дальнейшей
-    // самостоятельной работы, данный процесс не сложен и есть в интернете.
+    //Hibernate поддерживает несколько стратегий или вариантов генерации значений для primary key столбца.
+    // Эти варианты генерации значений описывает аннотация @GeneratedValue. (Смотрим Les_4 - класс Employee).
+    // Для MySQL баз аннотация со стратегией @GeneratedValue(strategy = GenerationType.IDENTITY) является
+    // наиболее правильной и самой распространенной. Не нежно полагаться на автоматический выбор стратегии,
+    // желательно прописывать её самостоятельно.
 
-    //Далее необходимо перейти в MySQL Workbench, выполнить INSERT запрос и увидеть, что
-    // наш объект employee и все его поля были успешно добавлены в таблицу нашей БД.
-
+    //После того как работник добавился в таблицу и id сгенерировался и значение этого id передаётся
+    // в поле id нашего объекта employee. Это говорит о том что вид объекта в Java и вид строки в БД
+    // будут идентичны.
 }
