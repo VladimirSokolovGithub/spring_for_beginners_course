@@ -1,4 +1,4 @@
-package ru.sokolov.spring.chapter_3_HibernateBasics.Les_13_One_to_Many_Relationship_Bidirectional.entity;
+package ru.sokolov.spring.chapter_3_HibernateBasics.Les_14_One_to_Many_Relationship_UniDirectional.entity;
 
 import javax.persistence.*;
 
@@ -20,16 +20,6 @@ public class Employee {
 
     @Column(name = "salary")
     private int salary;
-
-    //Когда мы работаем с аннотацией @JoinColumn() мы всегда прописываем в ней столбец Foreign Key.
-
-    //Для проверки удаления работников закомментируем предыдущую аннотацию @OneToMany
-    // с CascadeType.ALL и напишем новый каскад - всё кроме REMOVE
-//    @ManyToOne(cascade = CascadeType.ALL)
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH
-            , CascadeType.DETACH, CascadeType.MERGE })
-    @JoinColumn(name = "department_id")
-    private Department department;
 
     public Employee() {
     }
@@ -73,14 +63,6 @@ public class Employee {
 
     public void setSalary(int salary) {
         this.salary = salary;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
     }
 
     @Override

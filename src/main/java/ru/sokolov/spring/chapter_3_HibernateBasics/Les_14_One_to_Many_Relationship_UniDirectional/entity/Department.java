@@ -1,4 +1,4 @@
-package ru.sokolov.spring.chapter_3_HibernateBasics.Les_13_One_to_Many_Relationship_Bidirectional.entity;
+package ru.sokolov.spring.chapter_3_HibernateBasics.Les_14_One_to_Many_Relationship_UniDirectional.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,13 +22,10 @@ public class Department {
     @Column(name = "min_salary")
     private int minSalary;
 
-    //Работников в департаменте может быть много, поэтому мы можем использовать List работников
-
-    //Для проверки удаления работников закомментируем предыдущую аннотацию @OneToMany
-    // с CascadeType.ALL и напишем новый каскад - всё кроме REMOVE
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "department")
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH
-            , CascadeType.DETACH, CascadeType.MERGE }, mappedBy = "department")
+    //В нашем случае при связи One-to-Many Uni-directional, department_id в аннотации
+    // @JoinColumn(name = "department_id") - это Foreign Key из таблицы employees3.
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id")
     private List<Employee> emps;
 
     public Department() {
@@ -40,18 +37,11 @@ public class Department {
         this.minSalary = minSalary;
     }
 
-    //Из за того, что это Bi-Directional связь мы должны employee из параметра метода, прописать,
-    // что его департамент this т.е объект(department) на котором мы будем вызывать метод
-    // addEmployeeToDepartment именно этот департамент будет департаментом работника которого
-    // мы будем добавлять.
-
     public void addEmployeeToDepartment(Employee employee){
         if(emps == null){
             emps = new ArrayList<>();
         }
         emps.add(employee);
-        employee.setDepartment(this); //вот здесь мы прописываем Bi-Directional связь между
-                                      // работником и департаментом
     }
 
     public int getId() {

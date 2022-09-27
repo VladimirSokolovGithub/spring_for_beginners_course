@@ -3,8 +3,8 @@ package ru.sokolov.spring.chapter_3_HibernateBasics.Les_13_One_to_Many_Relations
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import ru.sokolov.spring.chapter_3_HibernateBasics.Les_11_One_to_One_relationship_Unidirectional_Part_1_and_2.entity.Detail;
-import ru.sokolov.spring.chapter_3_HibernateBasics.Les_11_One_to_One_relationship_Unidirectional_Part_1_and_2.entity.Employee;
+import ru.sokolov.spring.chapter_3_HibernateBasics.Les_13_One_to_Many_Relationship_Bidirectional.entity.Department;
+import ru.sokolov.spring.chapter_3_HibernateBasics.Les_13_One_to_Many_Relationship_Bidirectional.entity.Employee;
 
 
 public class Test10 {
@@ -13,71 +13,81 @@ public class Test10 {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employee.class)
-                .addAnnotatedClass(Detail.class)
+                .addAnnotatedClass(Department.class)
                 .buildSessionFactory();
 
         Session session = null;
 
         try {
 //            session = factory.getCurrentSession();
-//            //Создадим наши объекты
-//            Employee employee = new Employee("Vladimir", "Sokolov"
-//                    ,"IT", 500);
-//            Detail detail = new Detail("Elista", "1234567899"
-//                    , "vladimir@gmail.com");
 //
-//            employee.setEmpDetail(detail); //добавляем дополнительную информацию нашему работнику
+//            Department dep = new Department("IT", 300, 1200);
+//            Employee emp1 = new Employee("Vladimir", "Sokolov", 800);
+//            Employee emp2 = new Employee("Elena", "Smirnova", 1000);
 //
-//            session.beginTransaction(); //Открываем транзакцию
+//            dep.addEmployeeToDepartment(emp1);
+//            dep.addEmployeeToDepartment(emp2);
 //
-//            //Теперь для добавления объектов в таблицы, просто достаточно сохранить работника. И детали
-//            // этого работника автоматически благодаря каскаду @OneToOne(cascade = CascadeType.ALL) тоже
-//            // сохранятся в соответствующей таблице.
-//
-//            session.save(employee);
-//
-//            session.getTransaction().commit(); //Закрываем транзакцию(подтверждаем свои действия)
-//            System.out.println("Done!");
-
-
-//            session = factory.getCurrentSession();
-//            Employee employee = new Employee("Oleg", "Smirnov"
-//                    ,"Sales", 700);
-//            Detail detail = new Detail("Moscow", "51614651651"
-//                    , "oleg@gmail.com");
-//
-//            employee.setEmpDetail(detail)
 //            session.beginTransaction();
-//
-//            session.save(employee);
+//            session.save(dep);
 //
 //            session.getTransaction().commit();
 //            System.out.println("Done!");
 
 
+            //Получим из таблицы наш департамент и всех его работников.
 //            session = factory.getCurrentSession();
 //
 //            session.beginTransaction();
-//            //Получим из базы данных работника с id 1
-//            Employee emp = session.get(Employee.class, 1);
-//            //Теперь выведем на экран детали этого работника.
-//            // При этом я не писал код, который получает детали для этого работника. Мы просто запросили
-//            // из БД нашего работника. Но благодаря каскаду @OneToOne(cascade = CascadeType.ALL), мы получаем
-//            // из базы не только объект Employee, но и объект Detail, который связан с объектом enmp.
-//            System.out.println(emp.getEmpDetail());
+//            Department department = session.get(Department.class, 2);
+//            System.out.println(department);
+//            System.out.println(department.getEmps());
 //
 //            session.getTransaction().commit();
 //            System.out.println("Done!");
 
+
+            //Получим из Базы работника и узнаем его департамент
+//            session = factory.getCurrentSession();
+//
+//            session.beginTransaction();
+//            Employee employee = session.get(Employee.class, 1);
+//            System.out.println(employee);
+//            System.out.println(employee.getDepartment());
+//
+//            session.getTransaction().commit();
+//            System.out.println("Done!");
+
+
+            //Теперь рассмотрим пример с удалением работника (Это плохой пример
+            // так как cascade = CascadeType.ALL)
+//            session = factory.getCurrentSession();
+//
+//            session.beginTransaction();
+//            Employee employee = session.get(Employee.class, 1);
+//
+//            //Так как у нас и в Employee и в Department cascade = CascadeType.ALL, то
+//            // при такой записи удалятся все работники и департамент, а не работник с id = 1.
+//            // Так как удаление работника с id = 1 потянуло за собой удаление департамента, а
+//            // удаление департамента потянуло за собой удаление и работника с id = 2.
+//            // Такая же ситуация возникнет и при удалении департамента.
+//            // Для правильной работы нужно в обоих классах убрать CascadeType.ALL, а именно
+//            // уберем из этого ALL Remove и оставим все остальное.
+//            session.delete(employee);
+//
+//            session.getTransaction().commit();
+//            System.out.println("Done!");
+
+
+            //Правильный пример удаления работника, при этом в классах Employee и Department
+            // меняем CascadeType.ALL на
 
             session = factory.getCurrentSession();
 
             session.beginTransaction();
-            //Получим из базы данных работника с id 1
-            Employee emp = session.get(Employee.class, 1);
-            //И удалим работника с id 1 Vladimir Sokolov из базы. При этом удалится не только объект emp,
-            // но и связанные с ним детали.
-            session.delete(emp);
+            Employee employee = session.get(Employee.class, 1);
+
+            session.delete(employee);
 
             session.getTransaction().commit();
             System.out.println("Done!");
