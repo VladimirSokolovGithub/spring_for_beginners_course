@@ -1,0 +1,49 @@
+1. Нам нужно сконфигурировать файл web.xml
+
+Этот файл web.xml нам нужен для конфигурации DispatcherServlet - это наш Front Controller.
+
+org.springframework.web.servlet.DispatcherServlet - это класс, который отвечает за DispatcherServlet.
+
+В contextConfigLocation мы должны отписать где находится наш файл applicationContext.xml.
+
+Файл applicationContext.xml отвечает за конфигурацию Spring приложения, он пока не создан, но
+будет называться именно так.
+
+В
+    <servlet-mapping>
+      <servlet-name>dispatcher</servlet-name>
+      <url-pattern>/</url-pattern>
+    </servlet-mapping>
+мы прописываем URL адрес для DispatcherServlet. Т.е. набирая какой адрес http запрос будет поступать на
+наш DispatcherServlet. В url-pattern мы прописываем слэш /. Слэш / означает, что какой бы адрес URL
+мы не прописали, что бы в адресе не содержалось, по любому http request должен приходить на наш
+DispatcherServlet с именем dispatcher.
+
+
+2. Следующим этапом нам нужно сконфигурировать файл applicationContext.xml
+
+В пакете WEB-INF нужно создать новый файл applicationContext.xml и скопировать заранее подготовленное
+содержимое из файла 056 applicationContext.txt который находится в директории с уроком или в папке
+java/spring/mvc нашего проекта.
+
+В <context:component-scan base-package="spring.mvc" /> мы указываем в каком пакете и его подпакетах
+будет проходить сканирование и поиск компонентов.
+
+Далее прописывается <mvc:annotation-driven/> - это добавление поддержки форматирования, валидации и
+различных преобразований.
+
+Далее мы прописываем bean ViewResolver т.е. то, как мы будем работать с нашими представлениями иначе с
+нашими view. Мы указываем класс org.springframework.web.servlet.view.InternalResourceViewResolver и он
+будет отвечать за весь этот процесс. Дальше указываются prefix и suffix.
+В пакете WEB-INF создадим новую директорию и назовем её view, в ней мы будем создавать все наши view.
+Так вот prefix и suffix нужен для того чтобы можно было обращаться по имени к нашим представлениям(view),
+созданным в директории view. prefix отвечает за любое имя, а suffix за расширение .jsp нашего представления.
+Т.е. нам будет достаточно просто написать имя нашего созданного представлениям(view) и не указывать при
+этом расширение .jsp. Эта информация будет автоматически добавлена к имени нашего view с помощью
+нашего бина InternalResourceViewResolver.
+
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/view/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
