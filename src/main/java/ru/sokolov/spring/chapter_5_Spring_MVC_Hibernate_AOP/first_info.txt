@@ -1,0 +1,2 @@
+Глава 5 - chapter_5_Spring_MVC_Hibernate_AOP - рассматривается в отдельном проекте -
+- spring_for_beginners_course_mvc_hibernate_aop

@@ -1,0 +1,2 @@
+Глава 4 - chapter_4_Spring_MVC - рассматривается в отдельном проекте -
+- spring_for_beginners_course_mvc
